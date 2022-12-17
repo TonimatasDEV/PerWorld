@@ -16,14 +16,14 @@ public class PerWorldCommandEvents implements Listener {
             if (!event.getPlayer().hasPermission("perworldall.perwordcommands.bypass")) {
                 if (PerWorldAll.getInstance().getConfig().getConfigurationSection("commands." + message.toLowerCase()) != null) {
                     if (PerWorldAll.getInstance().getConfig().getBoolean("PerWorldCommands.isWorldBlacklist")) {
-                        if (PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message + ".allowed-worlds").contains(event.getPlayer().getWorld().getName().toLowerCase())) {
+                        if (PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message).contains(event.getPlayer().getWorld().getName().toLowerCase())) {
                             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', PerWorldAll.getInstance().getConfig().getString("PerWorldCommands.globalBlockMessage")));
                             event.setCancelled(true);
                         } else {
                             event.setCancelled(false);
                         }
                     } else {
-                        if (!PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message + ".allowed-worlds").contains(event.getPlayer().getWorld().getName().toLowerCase())) {
+                        if (!PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message).contains(event.getPlayer().getWorld().getName().toLowerCase())) {
                             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', PerWorldAll.getInstance().getConfig().getString("PerWorldCommands.globalBlockMessage")));
                             event.setCancelled(true);
                         } else {

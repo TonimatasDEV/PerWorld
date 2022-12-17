@@ -21,50 +21,53 @@ public class PerWorld implements CommandExecutor {
 
                         // Reload subcommand
                         if (args[0].equalsIgnoreCase("reload")) {
-                            PerWorldAll.getInstance().reloadConfig();
                             PerWorldAll.getInstance().saveConfig();
+                            PerWorldAll.getInstance().reloadConfig();
                             player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The plugin has been reloaded");
                         }
 
                         // Version subcommand
                         if (args[0].equalsIgnoreCase("version")) {
-                            // Fixme
+                            player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The plugin has been reloaded");
                         }
 
                         // PerWorldChat subcommands
                         if (args[0].equalsIgnoreCase("chat")) {
 
-                            // PerWorldChat help subcommand
-                            if (args[1].equalsIgnoreCase("help")) {
-                                // Fixme
-                            }
-
                             // PerWorldChat add subcommand
-                            if (args[1].equalsIgnoreCase("add")) {
-                                // Fixme
+                            if (args[1].equalsIgnoreCase("set")) {
+                                if (args.length >= 3) {
+                                    List<String> oldWorldsList = PerWorldAll.getInstance().getConfig().getStringList("PerWorldChat.worlds");
+
+                                    oldWorldsList.add(args[2]);
+
+                                    PerWorldAll.getInstance().getConfig().set("PerWorldChat.worlds", oldWorldsList);
+                                    PerWorldAll.getInstance().saveConfig();
+                                    PerWorldAll.getInstance().reloadConfig();
+
+                                    player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "World " + args[2] + " has been added.");
+                                } else {
+                                    player.sendMessage(Messages.SYNTAX_ERROR);
+                                }
                             }
 
                             // PerWorldChat remove subcommand
                             if (args[1].equalsIgnoreCase("remove")) {
-                                // Fixme
+                                List<String> oldWorldsList = PerWorldAll.getInstance().getConfig().getStringList("PerWorldChat.worlds");
+
+                                oldWorldsList.remove(args[2]);
+
+                                PerWorldAll.getInstance().getConfig().set("PerWorldChat.worlds", oldWorldsList);
+                                PerWorldAll.getInstance().saveConfig();
+                                PerWorldAll.getInstance().reloadConfig();
+
+                                player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "World " + args[2] + " has been removed.");
                             }
                         }
 
                         // PerWorldCommands subcommands
                         if (args[0].equalsIgnoreCase("commands")) {
                             if (args.length >= 2) {
-
-                                // PerWorldCommands remove subcommand
-                                if (args[1].equalsIgnoreCase("remove")) {
-                                    if (args.length >= 3) {
-                                        PerWorldAll.getInstance().getConfig().set("commands." + args[2], null);
-                                        PerWorldAll.getInstance().saveConfig();
-                                        PerWorldAll.getInstance().reloadConfig();
-                                        sender.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The command " + args[2] + " has been removed.");
-                                    } else {
-                                        sender.sendMessage(Messages.SYNTAX_ERROR);
-                                    }
-                                }
 
                                 // PerWorldCommands set subcommand
                                 if (args[1].equalsIgnoreCase("set")) {
@@ -82,10 +85,11 @@ public class PerWorld implements CommandExecutor {
                                                 number++;
                                             }
 
-                                            PerWorldAll.getInstance().getConfig().set("commands." + args[2] + ".allowed-worlds", worldList);
+                                            PerWorldAll.getInstance().getConfig().set("commands." + args[2], worldList);
                                             PerWorldAll.getInstance().saveConfig();
                                             PerWorldAll.getInstance().reloadConfig();
-                                            sender.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The command " + args [2] + " has been added.");
+
+                                            player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The command " + args[2] + " has been added.");
                                         } else {
                                             player.sendMessage(Messages.SYNTAX_ERROR);
                                         }
@@ -94,13 +98,26 @@ public class PerWorld implements CommandExecutor {
                                     }
                                 }
 
-                                // PerWorldTabList subcommands
+                                // PerWorldCommands remove subcommand
+                                if (args[1].equalsIgnoreCase("remove")) {
+                                    if (args.length >= 3) {
+                                        PerWorldAll.getInstance().getConfig().set("commands." + args[2], null);
+                                        PerWorldAll.getInstance().saveConfig();
+                                        PerWorldAll.getInstance().reloadConfig();
 
-                                // PerWorldScoreboard subcommands
+                                        player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The command " + args[2] + " has been removed.");
+                                    } else {
+                                        player.sendMessage(Messages.SYNTAX_ERROR);
+                                    }
+                                }
                             } else {
-                                sender.sendMessage(Messages.SYNTAX_ERROR);
+                                player.sendMessage(Messages.SYNTAX_ERROR);
                             }
                         }
+
+                        // PerWorldTabList subcommands
+
+                        // PerWorldScoreboard subcommands
                     } else {
                         player.sendMessage(Messages.SYNTAX_ERROR);
                     }
