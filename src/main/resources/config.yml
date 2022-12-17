@@ -1,4 +1,9 @@
 PerWorldChat:
-  - test
+  enabled: true
+  worlds:
+    - test
 
-
+PerWorldCommands:
+  enabled: true
+  isWorldBlacklist: false
+  globalBlockMessage: "&4Error: &fThis command is disabled, Sorry!"

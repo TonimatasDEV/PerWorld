@@ -1,20 +1,24 @@
 name: PerWorldAll
 version: '${version}'
 main: net.tonimatasdev.perworldall.PerWorldAll
-api-version: 1.19
+api-version: 1.13
 authors: [ TonimatasDEV ]
-description: Separe tablist per world
+description: Set things for certain worlds
 website: https://www.tonimatas.dev
 
 commands:
-  pwc:
-    description: Main command.
+  perworld:
+    description: Primary command.
+
 permissions:
-  pwc.reload:
-    description: Allows player to use /pwc reload
-  pwc.add:
-    description: Allows player to use /pwc add <World name>
-  pwc.command:
-    description: Allows player to use /pwc
-  pwc.remove:
-    description: Allows player to use /pwc remove <World name>
+  perworldall.*:
+    description: All permissions of PerWorldAll
+    children:
+      - perworldall.admin
+      - perworldall.perworldcommands
+
+  perworldall.admin:
+    description: Primary permossion.
+
+  perworldall.perworldcommands.bypass:
+    description: Permission for bypass command block.
