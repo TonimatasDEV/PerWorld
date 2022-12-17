@@ -21,8 +21,8 @@ public class PerWorld implements CommandExecutor {
 
                         // Reload subcommand
                         if (args[0].equalsIgnoreCase("reload")) {
-                            PerWorldAll.getInstance().saveConfig();
                             PerWorldAll.getInstance().reloadConfig();
+                            PerWorldAll.getInstance().saveConfig();
                             player.sendMessage(ChatColor.DARK_GREEN + "[Successfully]: " + ChatColor.WHITE + "The plugin has been reloaded");
                         }
 
@@ -85,7 +85,7 @@ public class PerWorld implements CommandExecutor {
                                                 number++;
                                             }
 
-                                            PerWorldAll.getInstance().getConfig().set("commands." + args[2], worldList);
+                                            PerWorldAll.getInstance().getConfig().set("PerWorldCommands.commands." + args[2], worldList);
                                             PerWorldAll.getInstance().saveConfig();
                                             PerWorldAll.getInstance().reloadConfig();
 
@@ -101,7 +101,7 @@ public class PerWorld implements CommandExecutor {
                                 // PerWorldCommands remove subcommand
                                 if (args[1].equalsIgnoreCase("remove")) {
                                     if (args.length >= 3) {
-                                        PerWorldAll.getInstance().getConfig().set("commands." + args[2], null);
+                                        PerWorldAll.getInstance().getConfig().set("PerWorldCommands.commands." + args[2], null);
                                         PerWorldAll.getInstance().saveConfig();
                                         PerWorldAll.getInstance().reloadConfig();
 
@@ -122,8 +122,10 @@ public class PerWorld implements CommandExecutor {
                         player.sendMessage(Messages.SYNTAX_ERROR);
                     }
                 } else {
-                    sender.sendMessage("No a player");
+                    sender.sendMessage(Messages.PLAYER_ERROR);
                 }
+            } else {
+                sender.sendMessage(Messages.PERMISSION_ERROR);
             }
         }
 

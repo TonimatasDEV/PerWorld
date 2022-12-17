@@ -2,6 +2,7 @@ package net.tonimatasdev.perworldall;
 
 import net.tonimatasdev.perworldall.command.PerWorld;
 import net.tonimatasdev.perworldall.event.PerWorldChatEvents;
+import net.tonimatasdev.perworldall.event.PerWorldCommandEvents;
 import net.tonimatasdev.perworldall.tab.TabulatorCompleter;
 import net.tonimatasdev.perworldall.util.PluginDescription;
 import org.bukkit.ChatColor;
@@ -17,21 +18,21 @@ public final class PerWorldAll extends JavaPlugin {
         PluginDescription.register();
 
         // Enable message
-        getServer().getConsoleSender().sendMessage(ChatColor.DARK_GREEN + PluginDescription.getPrefix() + " has been enabled!");
+        this.getServer().getConsoleSender().sendMessage(ChatColor.DARK_GREEN + PluginDescription.getPrefix() + " has been enabled!");
 
         // Register commands
-        getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
-        getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
-        getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
-        getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
+        this.getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
+        this.getServer().getPluginManager().registerEvents(new PerWorldCommandEvents(), this);
+        //this.getServer().getPluginManager().registerEvents(new PerWorldScoreboardEvents(), this);
+        //this.getServer().getPluginManager().registerEvents(new PerWorldTabListEvents(), this);
 
         // Register commands
-        getServer().getPluginCommand("perworld").setExecutor(new PerWorld());
-        getServer().getPluginCommand("perworld").setTabCompleter(new TabulatorCompleter());
+        this.getServer().getPluginCommand("perworld").setExecutor(new PerWorld());
+        this.getServer().getPluginCommand("perworld").setTabCompleter(new TabulatorCompleter());
 
         // Register config
-        saveDefaultConfig();
-        reloadConfig();
+        this.saveDefaultConfig();
+        this.reloadConfig();
     }
 
     @Override

@@ -10,5 +10,4 @@ PerWorldCommands:
 
   commands:
     example:
-      allowedWorlds:
-        - example
+      - example

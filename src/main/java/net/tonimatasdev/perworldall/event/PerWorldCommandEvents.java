@@ -14,7 +14,7 @@ public class PerWorldCommandEvents implements Listener {
             String message = event.getMessage().split(" ")[0].replace("/", "");
 
             if (!event.getPlayer().hasPermission("perworldall.perwordcommands.bypass")) {
-                if (PerWorldAll.getInstance().getConfig().getConfigurationSection("commands." + message.toLowerCase()) != null) {
+                if (!PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message.toLowerCase()).isEmpty()) {
                     if (PerWorldAll.getInstance().getConfig().getBoolean("PerWorldCommands.isWorldBlacklist")) {
                         if (PerWorldAll.getInstance().getConfig().getStringList("PerWorldCommands.commands." + message).contains(event.getPlayer().getWorld().getName().toLowerCase())) {
                             event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', PerWorldAll.getInstance().getConfig().getString("PerWorldCommands.globalBlockMessage")));
