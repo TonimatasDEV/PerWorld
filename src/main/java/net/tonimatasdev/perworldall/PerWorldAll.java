@@ -2,6 +2,7 @@ package net.tonimatasdev.perworldall;
 
 import net.tonimatasdev.perworldall.command.PerWorld;
 import net.tonimatasdev.perworldall.event.PerWorldChatEvents;
+import net.tonimatasdev.perworldall.tab.TabulatorCompleter;
 import net.tonimatasdev.perworldall.util.PluginDescription;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +27,7 @@ public final class PerWorldAll extends JavaPlugin {
 
         // Register commands
         getServer().getPluginCommand("perworld").setExecutor(new PerWorld());
+        getServer().getPluginCommand("perworld").setTabCompleter(new TabulatorCompleter());
 
         // Register config
         saveDefaultConfig();
