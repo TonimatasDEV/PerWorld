@@ -3,6 +3,7 @@ package net.tonimatasdev.perworldall.event;
 import net.tonimatasdev.perworldall.PerWorldAll;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,9 +22,13 @@ public class PerWorldChatEvents implements Listener {
                     }
                 }
             } else {
-                for (String worlds : PerWorldAll.getInstance().getConfig().getStringList("PerWorldChat.worlds")) {
-                    for (Player player : Bukkit.getWorld(worlds).getPlayers()) {
-                        event.getRecipients().remove(player);
+                for (String worldName : PerWorldAll.getInstance().getConfig().getStringList("PerWorldChat.worlds")) {
+                    World world = event.getPlayer().getServer().getWorld(worldName);
+
+                    if (world != null) {
+                        for (Player player : world.getPlayers()) {
+                            event.getRecipients().remove(player);
+                        }
                     }
                 }
             }
