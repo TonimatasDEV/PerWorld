@@ -28,6 +28,7 @@ public class TabulatorCompleter  implements TabCompleter {
                 argList.add("version");
                 argList.add("commands");
                 argList.add("chat");
+                argList.add("tablist");
                 return argList.stream().filter(a -> a.startsWith(args[0])).collect(Collectors.toList());
             }
 
@@ -41,6 +42,12 @@ public class TabulatorCompleter  implements TabCompleter {
             if (args.length == 2 && args[0].equalsIgnoreCase("chat")) {
                 argList.add("set");
                 argList.add("remove");
+                return argList;
+            }
+
+            if (args.length == 2 && args[0].equalsIgnoreCase("tablist")) {
+                argList.add("enable");
+                argList.add("disable");
                 return argList;
             }
 

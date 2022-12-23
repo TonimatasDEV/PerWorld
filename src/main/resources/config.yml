@@ -3,6 +3,9 @@ PerWorldChat:
   worlds:
     - test
 
+PerWorldTabList:
+  enabled: false
+
 PerWorldCommands:
   enabled: true
   isWorldBlacklist: false
@@ -11,3 +14,4 @@ PerWorldCommands:
   commands:
     example:
       - example
+
