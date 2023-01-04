@@ -3,6 +3,7 @@ package net.tonimatasdev.perworldall;
 import net.tonimatasdev.perworldall.command.PerWorld;
 import net.tonimatasdev.perworldall.event.PerWorldChatEvents;
 import net.tonimatasdev.perworldall.event.PerWorldCommandEvents;
+import net.tonimatasdev.perworldall.event.PerWorldPlugins;
 import net.tonimatasdev.perworldall.event.PerWorldTabListEvents;
 import net.tonimatasdev.perworldall.tab.TabulatorCompleter;
 import net.tonimatasdev.perworldall.util.PluginDescription;
@@ -25,7 +26,7 @@ public final class PerWorldAll extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PerWorldChatEvents(), this);
         this.getServer().getPluginManager().registerEvents(new PerWorldCommandEvents(), this);
         this.getServer().getPluginManager().registerEvents(new PerWorldTabListEvents(), this);
-        //this.getServer().getPluginManager().registerEvents(new PerWorldScoreboardEvents(), this);
+        this.getServer().getPluginManager().registerEvents(new PerWorldPlugins(), this);
 
         // Register commands
         this.getServer().getPluginCommand("perworld").setExecutor(new PerWorld());
